@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DramaKu</title>
+<style>
+body{margin:0;background:#0b0d12;color:#fff;font:15px Arial,sans-serif}header{padding:18px 6%;display:flex;gap:20px;align-items:center;background:#11141b;position:sticky;top:0;z-index:2}.logo{font-size:25px;font-weight:800;color:#8b6cff}.logo span{color:#fff}input{margin-left:auto;width:230px;padding:11px 15px;border:0;border-radius:22px;background:#222631;color:#fff}.hero{padding:70px 7%;background:linear-gradient(100deg,#17112b,#0b0d12)}h1{font-size:48px;margin:10px 0}.btn{padding:12px 18px;border:0;border-radius:8px;background:#7657ff;color:white;font-weight:bold;cursor:pointer}section{padding:30px 6%}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px}.card{background:#171a22;border-radius:12px;overflow:hidden;cursor:pointer}.poster{height:220px;padding:15px;display:flex;align-items:end;background:linear-gradient(145deg,#493078,#171a22);font-size:19px;font-weight:bold}.info{padding:12px;color:#aaa}.modal{display:none;position:fixed;inset:0;background:#000d;align-items:center;justify-content:center;padding:20px;z-index:5}.box{background:#151820;padding:20px;border-radius:14px;width:min(850px,100%)}video{width:100%;background:#000;max-height:70vh}.close{float:right;background:none;border:0;color:#fff;font-size:25px;cursor:pointer}
+</style>
+</head>
+<body>
+<header><div class="logo">Drama<span>Ku</span></div><input id="q" placeholder="Cari drama..." oninput="show()"></header>
+<div class="hero"><small>PLATFORM DRAMA</small><h1>Nonton drama favoritmu.</h1><p>Klik judul untuk membuka pemutar video.</p></div>
+<section><h2>Drama Pilihan</h2><div class="grid" id="list"></div></section>
+<div class="modal" id="m"><div class="box"><button class="close" onclick="closeM()">×</button><h2 id="t"></h2><video id="v" controls></video><p id="d"></p></div></div>
+<script>
+const data=[
+["Moonlight Promise","Romance • 16 Episode","https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"],
+["Hidden Letters","Mystery • 12 Episode","https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"],
+["Second Spring","Drama • 20 Episode","https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"],
+["Midnight Café","Romance • 10 Episode","https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"],
+["The Last Summer","Youth • 16 Episode","https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"],
+["Falling Again","Romance • 14 Episode","https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"]
+];
+function show(){let q=document.getElementById('q').value.toLowerCase();list.innerHTML=data.filter(x=>x[0].toLowerCase().includes(q)).map((x,i)=>`<div class="card" onclick="openM(${i})"><div class="poster">${x[0]}</div><div class="info">${x[1]}</div></div>`).join('')}
+function openM(i){t.textContent=data[i][0];d.textContent=data[i][1];v.src=data[i][2];m.style.display='flex';v.play()}
+function closeM(){v.pause();v.removeAttribute('src');v.load();m.style.display='none'} show();
+</script>
+</body></html>
